@@ -4,13 +4,24 @@ Welcome to the Brido KRAI 2025 Computer Vision repository! This is the code of t
 ## Training Model
 Abu Robocon's rule stated that R2 need a system that could detect a ball and silo, so i used an object detection model as that was the most effective system for the R2. So, i used YOLOv8 to train model that can detect ball and silo.
 
-**1.Dataset**: We get the dataset manually using our  webcam, so the actual performance of the robot and the model is similar.
-
-**2.Annotation**: For the annotation, we used Roboflow as a platform to annotate, preprocessing, and augmentation of the dataset.
-
-**3.Format**: To adjust the dataset after process above, i also used Roboflow to convert it to the YOLOv8 format.
+**Preprocessing Dataset**
+**- Dataset**: We get the dataset manually using our  webcam, so the actual performance of the robot and the model is similar.
+**- Annotation**: For the annotation, we used Roboflow as a platform to annotate, preprocessing, and augmentation of the dataset.
+**- Format**: To adjust the dataset after process above, i also used Roboflow to convert it to the YOLOv8 format.
 
 Roboflow: https://roboflow.com/
+
+
+After I got the dataset that match with the YOLOv8 format, next i just need to train the dataset using ultralytics library. To train the model, you just need to do these simple and few line of code.
+'''python
+from ultralytics import YOLO
+
+# Load a pre-trained YOLO model (you can choose n, s, m, l, or x versions)
+model = YOLO("yolo9s.pt")
+
+# Start training on your custom dataset
+model.train(data="path/to/dataset.yaml", epochs=100, imgsz=640)
+'''
 
 ## Image Processing (CV2)
 
