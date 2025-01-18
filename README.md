@@ -143,9 +143,6 @@ The center_bbox function calculates the center point of a bounding box for a det
 ```
 The color_masking function isolates specific colors within a video frame using a color range in the HSV color space. It defines a range for the target color (adjustable via light_color and dark_color), converts the frame from BGR to HSV, and creates a binary mask where only pixels within the target color range are highlighted. This mask is applied to the frame using bitwise operations to produce the color-isolated output. Additionally, the function specifies the BGR color ([0, 255, 0]) for bounding boxes, which can be used for further annotations. It returns the masked frame and the selected BGR color values.
 
-
-As for the complete code and the algorithm, just see the file attach on this repo. Those are only the highlight of the main mechanism of the object computer vision system I implemented on the R2.
-
 ## Data Communication
 **Serial Communication**
 ```python
@@ -171,4 +168,7 @@ As for the complete code and the algorithm, just see the file attach on this rep
 
 This code facilitates communication between a Python script and an Arduino using a serial connection. The Python script processes video frames to detect objects like a ball and a silo, calculates error values (errBall and errSilo), and optionally performs color detection. It sends these error values to the Arduino in a loop, alternating between ball and silo data based on the value of a % 2. Each transmission starts with a command identifier ('S') followed by the error data.
 
-After sending data, the script waits for a response from the Arduino, which it reads and decodes. If decoding fails due to invalid characters, the error is logged. This setup is common in robotics and IoT, where high-level systems process data and send commands to low-level controllers that execute tasks and provide feedback. Here, the Arduino likely uses the error values to control actuators or make adjustments in a vision-guided system.
+After sending data, the script waits for a response from the Arduino, which it reads and decodes. If decoding fails due to invalid characters, the error is logged. Here, the Arduino uses the error values to control actuators and make adjustments in a vision-guided system.
+
+
+As for the complete code and the algorithm, just see the file attach on this repo. Those are only the highlight of the main mechanism of the object computer vision system I implemented on the R2.
