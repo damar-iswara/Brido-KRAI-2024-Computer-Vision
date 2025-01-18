@@ -13,7 +13,7 @@ Roboflow: https://roboflow.com/
 
 
 After I got the dataset that match with the YOLOv8 format, next i just need to train the dataset using ultralytics library. To train the model, you just need to do these simple and few line of code.
-'''python
+```python
 from ultralytics import YOLO
 
 # Load a pre-trained YOLO model (you can choose n, s, m, l, or x versions)
@@ -21,7 +21,7 @@ model = YOLO("yolo9s.pt")
 
 # Start training on your custom dataset
 model.train(data="path/to/dataset.yaml", epochs=100, imgsz=640)
-'''
+```
 
 ## Image Processing (CV2)
 
