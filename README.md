@@ -85,7 +85,7 @@ Next step is implementing the model using OpenCV/CV2 to do the image processing.
 
         return frame, length
 ```
-
+The plot_silo_bboxes function identifies and prioritizes bounding boxes around objects detected in a frame, focusing specifically on silos. It iterates through detection results to extract bounding box coordinates, class IDs, and object names. For each object, it calculates the bounding box's center and distance. Priority is given to "Silo-1," with "Silo-2" considered only if no "Silo-1" is detected. The closest bounding box is determined by minimizing the distance, and its coordinates and class ID are stored. If a valid bounding box is identified, a green rectangle is drawn around it in the frame, with its class name displayed as text. This logic helps highlight the most relevant object based on proximity and priority.
 
 **Error Calculation**
 ```python
@@ -111,6 +111,7 @@ Next step is implementing the model using OpenCV/CV2 to do the image processing.
         
         return frame, error
 ```
+The center_bbox function calculates the center point of a bounding box for a detected object and determines its horizontal error relative to a reference point in the frame. It takes the bounding box coordinates, calculates the center point, and compares it to a predefined reference center ([320, 480]) using the object_length method. The calculated error is displayed near the bounding box, and a visual indicator (a green circle at the center and a black horizontal line) is added to the frame for better visualization. This function is essential for determining object alignment and highlighting relevant metrics.
 
 *Color Masking*
 ```python
@@ -138,16 +139,33 @@ Next step is implementing the model using OpenCV/CV2 to do the image processing.
         # Return the mask result and the bgr value for bbox
         return color_result, b, g, r
 ```
+The color_masking function isolates specific colors within a video frame using a color range in the HSV color space. It defines a range for the target color (adjustable via light_color and dark_color), converts the frame from BGR to HSV, and creates a binary mask where only pixels within the target color range are highlighted. This mask is applied to the frame using bitwise operations to produce the color-isolated output. Additionally, the function specifies the BGR color ([0, 255, 0]) for bounding boxes, which can be used for further annotations. It returns the masked frame and the selected BGR color values.
+
 
 As for the complete code and the algorithm, just see the file attach on this repo. Those are only the highlight of the main mechanism of the object computer vision system I implemented on the R2.
 
 ## Data Communication
+```python
+            # Integrating bounding boxes and color detection to the frame
+            ballFrame, errBall = self.plot_ball_bboxes(predBallFrame, frame)
+            siloFrame, errSilo = self.plot_silo_bboxes(predSiloFrame, frame2)
+            color_frame, b, g, r = self.color_masking(frame)
+            
+            print(f"Error Bola: {errBall}")
+            print(f"Error Silo: {errSilo}")
+            if(a % 2 == 0):
+                serialInst.write('S'.encode())
+                serialInst.write(f'{errBall}'.encode())
+            else:
+                serialInst.write('S'.encode())
+                serialInst.write(f'{errSilo}'.encode())     
+            try:
+                response = serialInst.readline().decode('utf-8', errors='ignore').strip() # Read the response from Arduino
+                print(f"Response Received: {response}")
+            except UnicodeDecodeError as e:
+                print("UnicodeDecodeError:", e)
+```
 
+This code facilitates communication between a Python script and an Arduino using a serial connection. The Python script processes video frames to detect objects like a ball and a silo, calculates error values (errBall and errSilo), and optionally performs color detection. It sends these error values to the Arduino in a loop, alternating between ball and silo data based on the value of a % 2. Each transmission starts with a command identifier ('S') followed by the error data.
 
-
-
-
-
-
-
-
+After sending data, the script waits for a response from the Arduino, which it reads and decodes. If decoding fails due to invalid characters, the error is logged. This setup is common in robotics and IoT, where high-level systems process data and send commands to low-level controllers that execute tasks and provide feedback. Here, the Arduino likely uses the error values to control actuators or make adjustments in a vision-guided system.
