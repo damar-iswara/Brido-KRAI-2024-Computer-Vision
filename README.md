@@ -6,8 +6,8 @@ Abu Robocon's rule stated that R2 need a system that could detect a ball and sil
 
 *Preprocessing Dataset*
 - Dataset: We get the dataset manually using our  webcam, so the actual performance of the robot and the model is similar.
-**- Annotation**: For the annotation, we used Roboflow as a platform to annotate, preprocessing, and augmentation of the dataset.
-**- Format**: To adjust the dataset after process above, i also used Roboflow to convert it to the YOLOv8 format.
+- Annotation: For the annotation, we used Roboflow as a platform to annotate, preprocessing, and augmentation of the dataset.
+- Format: To adjust the dataset after process above, i also used Roboflow to convert it to the YOLOv8 format.
 
 Roboflow: https://roboflow.com/
 
