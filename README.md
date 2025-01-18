@@ -113,7 +113,7 @@ The plot_silo_bboxes function identifies and prioritizes bounding boxes around o
 ```
 The center_bbox function calculates the center point of a bounding box for a detected object and determines its horizontal error relative to a reference point in the frame. It takes the bounding box coordinates, calculates the center point, and compares it to a predefined reference center ([320, 480]) using the object_length method. The calculated error is displayed near the bounding box, and a visual indicator (a green circle at the center and a black horizontal line) is added to the frame for better visualization. This function is essential for determining object alignment and highlighting relevant metrics.
 
-*Color Masking*
+**Color Masking**
 ```python
     def color_masking(self, frame):
         # Blue Color
@@ -145,6 +145,7 @@ The color_masking function isolates specific colors within a video frame using a
 As for the complete code and the algorithm, just see the file attach on this repo. Those are only the highlight of the main mechanism of the object computer vision system I implemented on the R2.
 
 ## Data Communication
+**Serial Communication**
 ```python
             # Integrating bounding boxes and color detection to the frame
             ballFrame, errBall = self.plot_ball_bboxes(predBallFrame, frame)
