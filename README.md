@@ -28,9 +28,9 @@ model.train(data="path/to/dataset.yaml", epochs=100, imgsz=640)
 After that, you just need to wait until the training process ended. After the training process ended, next you can use it straight away or you can change the format of the model depends on the specification of your device. As for me, i convert the model to OpenVino and use quantization to compress the model to fp16.
 
 You can access more information through their documentation below.
-https://docs.ultralytics.com/#how-can-i-train-a-custom-yolo-model-on-my-dataset
-https://docs.ultralytics.com/modes/export/#arguments
-https://docs.ultralytics.com/integrations/openvino/#reproduce-our-results
+- https://docs.ultralytics.com/#how-can-i-train-a-custom-yolo-model-on-my-dataset
+- https://docs.ultralytics.com/modes/export/#arguments
+- https://docs.ultralytics.com/integrations/openvino/#reproduce-our-results
 
 ## Image Processing (CV2)
 
