@@ -1,0 +1,16 @@
+description: Ultralytics best_3_ball_class_n model trained on /content/Ball-3-Class-1/data.yaml
+author: Ultralytics
+date: '2024-06-16T15:55:15.537717'
+version: 8.2.32
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 640
+- 640
+names:
+  0: blueBall
+  1: purpleBall
+  2: redBall
